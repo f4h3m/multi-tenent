@@ -4,7 +4,7 @@ import { useState } from "react";
 import { addDomainToVercel } from "@/lib/domains";
 
 export default function Home() {
-  const [subdomain, setSubdomain] = useState();
+  const [subdomain, setSubdomain] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function Home() {
         <form className="flex flex-col w-[300px]" onSubmit={handleSubmit}>
           <input
             type="text"
-            onChange={(e) => setSubdomain(e.target.value.trim())}
+            onChange={(e) => setSubdomain(e.target.value)}
             placeholder="Subdomain name"
             className="p-2 rounded-md text-black"
           />

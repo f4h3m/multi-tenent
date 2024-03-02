@@ -25,14 +25,22 @@ export default function Home() {
         console.log("Domain added successfully:", response);
         // Handle the response here if needed
         setisLoading(false);
-        formRef.current.reset();
+        if (formRef.current) {
+          formRef.current.reset();
+        } else {
+          console.warn("Form reference is null");
+        }
       })
       .catch((error) => {
         toast.warning(<div className="flex items-start">{error.message}</div>);
         console.error("Error adding domain:", error);
         // Handle errors here
         setisLoading(false);
-        formRef.current.reset();
+        if (formRef.current) {
+          formRef.current.reset();
+        } else {
+          console.warn("Form reference is null");
+        }
       });
   };
 

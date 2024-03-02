@@ -7,18 +7,18 @@ import {
 export const addDomainToVercel = async (domain: string) => {
   return await fetch(
     `https://api.vercel.com/v10/projects/${
-      process.env.PROJECT_ID_VERCEL
+      process.env.NEXT_PUBLIC_PROJECT_ID_VERCEL
     }/domains${
       process.env.TEAM_ID_VERCEL ? `?teamId=${process.env.TEAM_ID_VERCEL}` : ""
     }`,
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: domain,
+        name: domain + ".sniperwp.com",
         // Optional: Redirect www. to root domain
         // ...(domain.startsWith("www.") && {
         //   redirect: domain.replace("www.", ""),
@@ -31,13 +31,13 @@ export const addDomainToVercel = async (domain: string) => {
 export const removeDomainFromVercelProject = async (domain: string) => {
   return await fetch(
     `https://api.vercel.com/v9/projects/${
-      process.env.PROJECT_ID_VERCEL
+      process.env.NEXT_PUBLIC_PROJECT_ID_VERCEL
     }/domains/${domain}${
       process.env.TEAM_ID_VERCEL ? `?teamId=${process.env.TEAM_ID_VERCEL}` : ""
     }`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
       },
       method: "DELETE",
     }
@@ -51,7 +51,7 @@ export const removeDomainFromVercelTeam = async (domain: string) => {
     }`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
       },
       method: "DELETE",
     }
@@ -63,14 +63,14 @@ export const getDomainResponse = async (
 ): Promise<DomainResponse & { error: { code: string; message: string } }> => {
   return await fetch(
     `https://api.vercel.com/v9/projects/${
-      process.env.PROJECT_ID_VERCEL
+      process.env.NEXT_PUBLIC_PROJECT_ID_VERCEL
     }/domains/${domain}${
       process.env.TEAM_ID_VERCEL ? `?teamId=${process.env.TEAM_ID_VERCEL}` : ""
     }`,
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     }
@@ -89,7 +89,7 @@ export const getConfigResponse = async (
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     }
@@ -101,14 +101,14 @@ export const verifyDomain = async (
 ): Promise<DomainVerificationResponse> => {
   return await fetch(
     `https://api.vercel.com/v9/projects/${
-      process.env.PROJECT_ID_VERCEL
+      process.env.NEXT_PUBLIC_PROJECT_ID_VERCEL
     }/domains/${domain}/verify${
       process.env.TEAM_ID_VERCEL ? `?teamId=${process.env.TEAM_ID_VERCEL}` : ""
     }`,
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     }

@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
+import { AuthProvider } from "../Providers";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {children}
-        <Toaster richColors />
+        <AuthProvider>
+          {children}
+          <Toaster richColors />
+        </AuthProvider>
       </body>
     </html>
   );

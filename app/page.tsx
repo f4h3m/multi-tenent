@@ -19,7 +19,7 @@ export default function RootPage() {
           Welcome to Multi-tenent <br />
           Next.js App
         </h1>
-        <Link href="http://app.localhost:3000/login">
+        <Link href={`http://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/login`}>
           <Button className="px-10 py-2 inline-block mt-4 bg-black text-white">
             Login
           </Button>

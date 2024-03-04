@@ -1,14 +1,15 @@
+import NextAuth from "next-auth";
 import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectMongoDB } from "@/lib/mongodb";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password } = credentials;
         try {
           await connectMongoDB();
@@ -72,3 +73,7 @@ export const authOptions = {
     signIn: "/", // Update this to your sign-in page
   },
 };
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };

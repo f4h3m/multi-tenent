@@ -30,14 +30,14 @@ export default function Sidebar() {
             <ChevronRight />
           </PopoverTrigger>
           <PopoverContent className="w-[200px]" align="end" side="right">
-            <ul className="mb-3">
+            <ul className="mb-3 [&>li]:mb-2">
               <li>option 1</li>
               <li>option 2</li>
               <li>option 3</li>
               <li>option 4</li>
             </ul>
             <span
-              className="cursor-pointer w-full border-t-2 pt-2 flex justify-between items-center"
+              className="cursor-pointer w-full border-t-2 pt-3 flex justify-between items-center"
               onClick={() => {
                 signOut({ redirect: false }).then(() => {
                   router.push("/"); // Redirect to the dashboard page after signing out

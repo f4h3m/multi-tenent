@@ -15,7 +15,7 @@ export default function RootPage() {
   return (
     <>
       <section className="h-screen flex flex-col items-center justify-center">
-        <h1 className="text-4xl text-center mb-5">
+        <h1 className="text-4xl text-center mb-5 font-semibold">
           Welcome to Multi-tenent <br />
           Next.js App
         </h1>

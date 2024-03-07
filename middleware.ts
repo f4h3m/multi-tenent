@@ -54,11 +54,12 @@ export default async function middleware(req: NextRequest) {
   }
 
   // special case for `vercel.pub` domain
-  // if (hostname === "localhost:3000" ) {
-  //   return NextResponse.redirect(
-  //     "https://vercel.com/blog/platforms-starter-kit"
-  //   );
-  // }
+  if (
+    hostname === "localhost:3000" ||
+    `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+  ) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
 
   // rewrite root application to `/home` folder
   if (

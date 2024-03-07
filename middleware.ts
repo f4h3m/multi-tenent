@@ -22,8 +22,6 @@ export default async function middleware(req: NextRequest) {
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
-  console.log("req.headers", hostname);
-
   // special case for Vercel preview deployment URLs
   if (
     hostname.includes("---") &&
@@ -54,11 +52,10 @@ export default async function middleware(req: NextRequest) {
   }
 
   // special case for `vercel.pub` domain
-  if (
-    hostname === "localhost:3000" ||
-    `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-  ) {
-    return NextResponse.redirect(new URL("/", req.url));
+  if (hostname === "vercel.pub") {
+    return NextResponse.redirect(
+      "https://vercel.com/blog/platforms-starter-kit"
+    );
   }
 
   // rewrite root application to `/home` folder
@@ -66,7 +63,9 @@ export default async function middleware(req: NextRequest) {
     hostname === "localhost:3000" ||
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
-    return NextResponse.rewrite(new URL("/", req.url));
+    return NextResponse.rewrite(
+      new URL(`/home${path === "/" ? "" : path}`, req.url)
+    );
   }
 
   // rewrite everything else to `/[domain]/[slug] dynamic route

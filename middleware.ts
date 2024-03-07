@@ -64,7 +64,7 @@ export default async function middleware(req: NextRequest) {
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     return NextResponse.rewrite(
-      new URL(process.env.NEXT_PUBLIC_ROOT_DOMAIN, req.url)
+      new URL(`process.env.NEXT_PUBLIC_ROOT_DOMAIN`, req.url)
     );
   }
 
